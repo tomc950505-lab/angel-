@@ -112,7 +112,8 @@
 
     <div id="music-ctrl" onclick="toggleMusic()">
         <i class="fa-solid fa-music" style="color: var(--env-color);"></i>
-        <audio id="bgm" loop><source src="https://api.uomg.com/api/rand.music?sort=热歌榜&format=mp3" type="audio/mpeg"></audio>
+        <!-- 此处修改为你的 GitHub 仓库内音频文件名 -->
+        <audio id="bgm" loop><source src="Butterflies - Nohidea_min.mp3" type="audio/mpeg"></audio>
     </div>
 
     <div id="envelope-container" onclick="openLetter(this)">
@@ -132,7 +133,7 @@
          * 🛠️ 内容配置区
          */
         const CONFIG = [
-                       {
+            {
                 text: "虽然这张拍的很丑，但是这是我能找到的我拍的第一张照片，所以就放在这里了😜 回忆起刚认识的那一会儿，你们一起跟我破冰，说实话其实当时坐到那的时候想着谁都不理好好学习的😁，没想到你们却进入到我的生活中。",
                 img: "https://pic1.imgdb.cn/item/69f948f5c32b4b1956195be9.jpg" 
             },
@@ -144,7 +145,7 @@
                 text: "第一张合照？（我能找到的最早日期）\n回想起和你晚自习畅聊的时光，你真的是一个非常可爱的小女孩，虽然有时有些脆弱和一些小缺点，但这些才鲜活。希望你能永远像乐乐一样，永远保持那份能把‘大米饭’吃出幸福感的纯真，身边有着爱你的人",
                 img: "https://pic1.imgdb.cn/item/69f948f6c32b4b1956195bee.jpg"
             },
-                        {
+            {
                 text: "这张太萌了，必须单独放出来！",
                 img: "https://pic1.imgdb.cn/item/69f948f5c32b4b1956195bea.jpg"
             },
@@ -226,10 +227,13 @@
         // 拆信动作
         function openLetter(el) {
             el.classList.add('opened');
+            // 明确播放音频
+            if (audio) {
+                audio.play().catch(e => console.log("播放被拦截:", e));
+            }
             setTimeout(() => {
                 book.classList.add('show');
                 musicCtrl.style.visibility = 'visible';
-                audio.play();
                 musicCtrl.classList.add('spinning');
             }, 500);
         }
